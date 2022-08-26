@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/CMakeFiles/bootloader
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/CMakeFiles/bootloader.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/CMakeFiles/bootloader-complete.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
