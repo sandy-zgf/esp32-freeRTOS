@@ -145,10 +145,10 @@ void app_main(void)
         printf(" create queue handle successfully\n");
 
         // TaskHandle_t pxTask = NULL;
-        xTaskCreate(writetask, "writetask", 1024 * 5, (void *)Mailbox, 1, NULL);
-        xTaskCreate(readtask1, "readtask1", 1024 * 5, (void *)Mailbox, 2, NULL);
-        xTaskCreate(readtask2, "readtask2", 1024 * 5, (void *)Mailbox, 2, NULL);
-        xTaskCreate(readtask3, "readtask3", 1024 * 5, (void *)Mailbox, 2, NULL);
+        xTaskCreate(writeTask, "writetask", 1024 * 5, (void *)Mailbox, 1, NULL);
+        xTaskCreate(readTask1, "readtask1", 1024 * 5, (void *)Mailbox, 2, NULL);
+        xTaskCreate(readTask2, "readtask2", 1024 * 5, (void *)Mailbox, 2, NULL);
+        xTaskCreate(readTask3, "readtask3", 1024 * 5, (void *)Mailbox, 2, NULL);
     }
     else
     {
