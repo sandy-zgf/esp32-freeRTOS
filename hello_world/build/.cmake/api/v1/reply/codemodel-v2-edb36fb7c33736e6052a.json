@@ -1773,7 +1773,7 @@
 				{
 					"directoryIndex" : 15,
 					"id" : "__idf_app_update::@cc3b426666063acc9674",
-					"jsonFile" : "target-__idf_app_update-20fc73c7792e6904aa88.json",
+					"jsonFile" : "target-__idf_app_update-988870abd89fc16ea716.json",
 					"name" : "__idf_app_update",
 					"projectIndex" : 1
 				},
@@ -2095,7 +2095,7 @@
 				{
 					"directoryIndex" : 93,
 					"id" : "__idf_main::@7368607ed66887415643",
-					"jsonFile" : "target-__idf_main-fcd255b1e2afe7dda075.json",
+					"jsonFile" : "target-__idf_main-7c6988b637f575a898e1.json",
 					"name" : "__idf_main",
 					"projectIndex" : 1
 				},
@@ -2270,7 +2270,7 @@
 				{
 					"directoryIndex" : 23,
 					"id" : "__ldgen_output_sections.ld::@874df54e61e20112dfd4",
-					"jsonFile" : "target-__ldgen_output_sections.ld-7496b24ffe723f9454be.json",
+					"jsonFile" : "target-__ldgen_output_sections.ld-6347a9611cea33c085e2.json",
 					"name" : "__ldgen_output_sections.ld",
 					"projectIndex" : 1
 				},
@@ -2424,7 +2424,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "hello_world.elf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-hello_world.elf-9fc968dff26f989a2066.json",
+					"jsonFile" : "target-hello_world.elf-814216ecd160e7c77b96.json",
 					"name" : "hello_world.elf",
 					"projectIndex" : 0
 				},
