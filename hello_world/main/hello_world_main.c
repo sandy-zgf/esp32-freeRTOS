@@ -13,54 +13,56 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 
-#include "freertos/timers.h" //add by zgf
+#include "freertos/semphr.h" //add by zgf
 
-void TimerCallback(TimerHandle_t xTimer)
+SemaphoreHandle_t semphrHandle;
+
+int iCount = 0; //
+
+void myTask1(void *pvParam)
 {
-    const char * name;
+    while (1)
+    {
+        xSemaphoreTake(semphrHandle, portMAX_DELAY);
+        for (int i = 0; i < 10; i++)
+        {
+            iCount++; // count
+            printf("myTask1 iCount = %d\n", iCount);
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        }
+        xSemaphoreGive(semphrHandle);
+        vTaskDelay(pdMS_TO_TICKS(1000));
 
-    name = pcTimerGetName(xTimer);
-
-    printf("one shot!!! %s\n",name);
+        /* code */
+    }
 }
 
-typedef struct A_STRUCT
+void myTask2(void *pvParam)
 {
-    int id;
-    char data;
-} aStruct;
+    while (1)
+    {
+        xSemaphoreTake(semphrHandle, portMAX_DELAY);
+        for (int i = 0; i < 10; i++)
+        {
+            iCount++; // count
+            printf("myTask2 iCount = %d\n", iCount);
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        }
+        xSemaphoreGive(semphrHandle);
+        vTaskDelay(pdMS_TO_TICKS(1000));
 
-char *pcText = "Hello World zgf";
-
-aStruct aStructTest = {6, 9};
+        /* code */
+    }
+}
 
 int testNum = 99;
 int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 void app_main(void)
 {
-
-    TimerHandle_t xTimer1;
-    TimerHandle_t xTimer2;
-
-    xTimer1 = xTimerCreate("Timer1", pdMS_TO_TICKS(1000), pdTRUE, (void *)0, TimerCallback); // run once per second
-    xTimer2 = xTimerCreate("Timer2", pdMS_TO_TICKS(2000), pdTRUE, (void *)0, TimerCallback); // run once per second
-
-    xTimerStart(xTimer1, 0);
-    xTimerStart(xTimer2, 0);
-
-    vTaskDelay(pdMS_TO_TICKS(6000));
-    xTimerChangePeriod(xTimer1,pdMS_TO_TICKS(6000), 0); //
-
-    // while (1)
-    // {
-    //     vTaskDelay(pdMS_TO_TICKS(1000));
-    //     xTimerReset(xTimer2, 0);
-    // }
+    semphrHandle = xSemaphoreCreateBinary();
+    xSemaphoreGive(semphrHandle);
     
-
-    // vTaskDelay(pdMS_TO_TICKS(6000));
-
-
-    // xTimerStop(xTimer1,0);
+    xTaskCreate(myTask1,"myTask1",1024*5,NULL,1,NULL);
+    xTaskCreate(myTask2,"myTask2",1024*5,NULL,1,NULL);
 }
