@@ -25,7 +25,7 @@ char *pcText = "Hello World zgf";
 
 aStruct aStructTest = {6, 9};
 
-void sendTask(void *pvParam)
+void sendTask1(void *pvParam)
 {
 
     QueueHandle_t QHandle;
@@ -34,19 +34,38 @@ void sendTask(void *pvParam)
 
     BaseType_t xStatus;
 
-    char *pStrToSend;
 
-    int i = 0;
+    int i = 111;
 
     while (1)
     {
 
-        pStrToSend = (char *)malloc(50);
+        xStatus = xQueueSend(QHandle,&i, 0);
 
-        snprintf(pStrToSend, 50, "strInglessthan50 %d", i);
-        i++;
+        if (xStatus == pdPASS)
+            printf("send successfully\n");
+        else
+            printf("send failed\n");
 
-        xStatus = xQueueSend(QHandle,&pStrToSend, 0);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void sendTask2(void *pvParam)
+{
+
+    QueueHandle_t QHandle;
+
+    QHandle = (QueueHandle_t)pvParam;
+
+    BaseType_t xStatus;
+
+    int i = 222;
+
+    while (1)
+    {
+
+        xStatus = xQueueSend(QHandle,&i, 0);
 
         if (xStatus == pdPASS)
             printf("send successfully\n");
@@ -60,32 +79,29 @@ void sendTask(void *pvParam)
 void recTask(void *pvParam)
 {
 
-    QueueHandle_t QHandle;
+    QueueHandle_t QueueSet;
 
-    QHandle = (QueueHandle_t)pvParam;
+    QueueSet = (QueueHandle_t)pvParam;
 
-    char *pStrToReceive;
+    QueueSetMemberHandle_t QueueData;
+
+
 
     BaseType_t xStatus;
+
+    int i = 0;
 
 
     while (1)
     {
 
-        if (uxQueueMessagesWaiting(QHandle) != 0)
-        {
-            xStatus = xQueueReceive(QHandle,&pStrToReceive, 0);
+        QueueData = xQueueSelectFromSet(QueueSet,portMAX_DELAY);
+        xStatus = xQueueReceive(QueueData,&i, portMAX_DELAY);
 
-            if (xStatus == pdPASS)
-                printf("receive successfully \n%s\n",pStrToReceive);
-            else
-                printf("receive failed\n");
-            free(pStrToReceive);
-        }
+        if (xStatus == pdPASS)
+            printf("receive successfully \n%d\n",i);
         else
-        {
-            printf("no data received !\n");
-        }
+            printf("receive failed\n");
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
@@ -96,17 +112,30 @@ int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 void app_main(void)
 {
-    QueueHandle_t QHandle;
+    //发送线程1
+    QueueHandle_t QHandle1;
+    QHandle1 = xQueueCreate(5, sizeof(int));
 
-    QHandle = xQueueCreate(5, sizeof(char *));
+    //发送线程2
+    QueueHandle_t QHandle2;
+    QHandle2 = xQueueCreate(5, sizeof(int));
 
-    if (QHandle != NULL)
+    QueueSetHandle_t QueueSet;
+
+    QueueSet = xQueueCreateSet(10);
+
+    xQueueAddToSet(QHandle1, QueueSet);
+    xQueueAddToSet(QHandle2, QueueSet);
+
+
+    if ((QHandle1 != NULL) && (QHandle2 != NULL) && (QueueSet!= NULL))
     {
         printf(" create queue handle successfully\n");
 
         // TaskHandle_t pxTask = NULL;
-        xTaskCreate(sendTask, "sendTask", 1024 * 5, (void *)QHandle, 1, NULL);
-        xTaskCreate(recTask, "rectask", 1024 * 5, (void *)QHandle, 1, NULL);
+        xTaskCreate(sendTask1, "sendTask1", 1024 * 5, (void *)QHandle1, 1, NULL);
+        xTaskCreate(sendTask2, "sendTask2", 1024 * 5, (void *)QHandle2, 1, NULL);
+        xTaskCreate(recTask, "rectask", 1024 * 5, (void *)QueueSet, 1, NULL);
     }
     else
     {
