@@ -1,0 +1,57 @@
+Detecting CXX compiler ABI info failed to compile with the following output:
+Change Dir: D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Espressif/tools/ninja/1.10.2/ninja.exe cmTC_4e6a7 && [1/2] Building CXX object CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj
+FAILED: CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj 
+D:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe   -mlongcalls -Wno-frame-address     -v -o CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Espressif/tools/cmake/3.23.1/share/cmake-3.23/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=D:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe
+Target: xtensa-esp32-elf
+Configured with: /builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-host_w64-mingw32 --target=xtensa-esp32-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32-elf/xtensa-esp32-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r2-patch3' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpfr=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-mpc=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --with-isl=/builds/idf/crosstool-NG/.build/HOST-x86_64-w64-mingw32/xtensa-esp32-elf/buildtools/complibs-host --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes --with-gnu-ld
+Thread model: posix
+gcc version 8.4.0 (crosstool-NG esp-2021r2-patch3) 
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
+ d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/bin/../libexec/gcc/xtensa-esp32-elf/8.4.0/cc1plus.exe -quiet -v -iprefix d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/ D:/Espressif/tools/cmake/3.23.1/share/cmake-3.23/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj -Wno-frame-address -version -o C:\Users\26574\AppData\Local\Temp\ccNPCaKg.s
+GNU C++14 (crosstool-NG esp-2021r2-patch3) version 8.4.0 (xtensa-esp32-elf)
+	compiled by GNU C version 6.3.0 20170516, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include/c++/8.4.0"
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include/c++/8.4.0/xtensa-esp32-elf"
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include/c++/8.4.0/backward"
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/include"
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/include-fixed"
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/sys-include"
+ignoring duplicate directory "d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/lib/gcc/../../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include/c++/8.4.0
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include/c++/8.4.0/xtensa-esp32-elf
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include/c++/8.4.0/backward
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/include
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/include-fixed
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/sys-include
+ d:\espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin\../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/include
+End of search list.
+GNU C++14 (crosstool-NG esp-2021r2-patch3) version 8.4.0 (xtensa-esp32-elf)
+	compiled by GNU C version 6.3.0 20170516, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 26a2c96084b52974c1e086cdaa34e48e
+COLLECT_GCC_OPTIONS='-mlongcalls' '-Wno-frame-address' '-v' '-o' 'CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
+ d:/espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/bin/as.exe --traditional-format --longcalls -o CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\26574\AppData\Local\Temp\ccNPCaKg.s
+Assembler messages:
+Fatal error: can't create CMakeFiles/cmTC_4e6a7.dir/CMakeCXXCompilerABI.cpp.obj: No such file or directory
+ninja: build stopped: subcommand failed.
+
+
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: D:/file_zgf/vscode/esp32/esp32-freeRTOS/esp32-freeRTOS/hello_world/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Espressif/tools/ninja/1.10.2/ninja.exe cmTC_687b1 && ninja: error: loading 'build.ninja': 系统找不到指定的文件。
+
+
+
+

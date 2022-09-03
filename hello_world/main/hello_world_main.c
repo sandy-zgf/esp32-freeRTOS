@@ -13,31 +13,127 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 
-void app_main(void)
+#include "freertos/queue.h" //add by zgf
+
+typedef struct A_STRUCT
 {
-    printf("Hello world!\n");
+    int id;
+    char data;
+} aStruct;
 
-    /* Print chip information */
-    esp_chip_info_t chip_info;
-    esp_chip_info(&chip_info);
-    printf("This is %s chip with %d CPU core(s), WiFi%s%s, ",
-            CONFIG_IDF_TARGET,
-            chip_info.cores,
-            (chip_info.features & CHIP_FEATURE_BT) ? "/BT" : "",
-            (chip_info.features & CHIP_FEATURE_BLE) ? "/BLE" : "");
+char *pcText = "Hello World zgf";
 
-    printf("silicon revision %d, ", chip_info.revision);
+aStruct aStructTest = {6, 9};
 
-    printf("%dMB %s flash\n", spi_flash_get_chip_size() / (1024 * 1024),
-            (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
+void sendTask(void *pvParam)
+{
 
-    printf("Minimum free heap size: %d bytes\n", esp_get_minimum_free_heap_size());
+    QueueHandle_t QHandle;
 
-    for (int i = 10; i >= 0; i--) {
-        printf("Restarting in %d seconds...\n", i);
+    QHandle = (QueueHandle_t)pvParam;
+
+    BaseType_t xStatus;
+
+    char *pStrToSend;
+
+    int i = 0;
+
+    while (1)
+    {
+
+        pStrToSend = (char *)malloc(50);
+
+        snprintf(pStrToSend, 50, "strInglessthan50 %d", i);
+        i++;
+
+        xStatus = xQueueSend(QHandle,&pStrToSend, 0);
+
+        if (xStatus == pdPASS)
+            printf("send successfully\n");
+        else
+            printf("send failed\n");
+
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
-    printf("Restarting now.\n");
-    fflush(stdout);
-    esp_restart();
+}
+
+void recTask(void *pvParam)
+{
+
+    QueueHandle_t QHandle;
+
+    QHandle = (QueueHandle_t)pvParam;
+
+    char *pStrToReceive;
+
+    BaseType_t xStatus;
+
+
+    while (1)
+    {
+
+        if (uxQueueMessagesWaiting(QHandle) != 0)
+        {
+            xStatus = xQueueReceive(QHandle,&pStrToReceive, 0);
+
+            if (xStatus == pdPASS)
+                printf("receive successfully \n%s\n",pStrToReceive);
+            else
+                printf("receive failed\n");
+            free(pStrToReceive);
+        }
+        else
+        {
+            printf("no data received !\n");
+        }
+
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+int testNum = 99;
+int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+void app_main(void)
+{
+    QueueHandle_t QHandle;
+
+    QHandle = xQueueCreate(5, sizeof(char *));
+
+    if (QHandle != NULL)
+    {
+        printf(" create queue handle successfully\n");
+
+        // TaskHandle_t pxTask = NULL;
+        xTaskCreate(sendTask, "sendTask", 1024 * 5, (void *)QHandle, 1, NULL);
+        xTaskCreate(recTask, "rectask", 1024 * 5, (void *)QHandle, 1, NULL);
+    }
+    else
+    {
+        printf(" error!!!\n");
+    }
+
+    // UBaseType_t iStack;
+
+    // while (1)
+    // {
+    //     iStack = uxTaskGetStackHighWaterMark(myHandle); //获取当前堆栈的值
+    //     printf("the number of istask is %d\n",iStack);
+    //     vTaskDelay(1000 / portTICK_PERIOD_MS); //delay
+
+    // }
+
+    // vTaskSuspend(myHandle);
+
+    // vTaskDelay(5000 / portTICK_PERIOD_MS);
+    // vTaskResume(myHandle); //恢复当前的任务；
+
+    // vTaskDelay(3000/ portTICK_PERIOD_MS);
+    // vTaskSuspend(myHandle);
+
+    // vTaskPrioritySet(myHandle,3);
+
+    // iPriority = uxTaskPriorityGet(myHandle);
+
+    // printf("iPriority: %d\n", iPriority);
 }
