@@ -1250,6 +1250,18 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_unity::@fec746937506b5690992"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_coap::@9ea4196552bc90428972"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_esp_adc_cal::@dc736dc1d836ef36c9a5"
 		},
 		{
@@ -1266,15 +1278,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_coap::@9ea4196552bc90428972"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_unity::@fec746937506b5690992"
+			"id" : "__idf_protocomm::@d76d01c8dec06205e1fc"
 		},
 		{
 			"backtrace" : 3,
@@ -1283,14 +1287,6 @@
 		{
 			"backtrace" : 3,
 			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_protocomm::@d76d01c8dec06205e1fc"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
 		},
 		{
 			"backtrace" : 3,
@@ -1303,6 +1299,10 @@
 		{
 			"backtrace" : 3,
 			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
 		},
 		{
 			"backtrace" : 3,
@@ -1322,6 +1322,14 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_main::@7368607ed66887415643"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
 		},
 		{
@@ -1335,14 +1343,6 @@
 		{
 			"backtrace" : 3,
 			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_main::@7368607ed66887415643"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
 		}
 	],
 	"id" : "hello_world.elf::@6890427a1f51a3e7e1df",

@@ -15,57 +15,77 @@
 
 #include "freertos/semphr.h" //add by zgf
 
-SemaphoreHandle_t semphrHandle;
+SemaphoreHandle_t mutexHandle;
 
-int iCount = 0; //
-
-void carInTask(void *pvParam)
+void Task1(void *pvParam)
 {
-    int emptySpace = 0;
-
-    BaseType_t iResult;
     while (1)
     {
-        emptySpace = uxSemaphoreGetCount(semphrHandle);
-        printf("emptySpace = %d\n", emptySpace);
+        printf("----------------------------------------------------------------\n");
+        printf("task1 begin\n");
+        xSemaphoreTakeRecursive(mutexHandle, portMAX_DELAY);
 
-        iResult = xSemaphoreTake(semphrHandle, 0);
+        printf("Task1 take A!\n");
+        for (int i = 0; i < 10; i++)
+        {
+            printf("task1 i = %d for A\n", i);
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        }
+        xSemaphoreTakeRecursive(mutexHandle, portMAX_DELAY);
 
-        if (iResult == pdPASS)
+        printf("Task1 take B!\n");
+        for (int i = 0; i < 10; i++)
         {
-            printf("one car in!\n");
+            printf("task1 i = %d for B\n", i);
+            vTaskDelay(pdMS_TO_TICKS(1000));
         }
-        else
-        {
-            printf("no car in!");
-        }
-        vTaskDelay(pdMS_TO_TICKS(1000));
+
+
+        printf("Task1 give B!\n");
+        xSemaphoreGiveRecursive(mutexHandle);
+
+        vTaskDelay(pdMS_TO_TICKS(3000));
+
+        printf("Task1 give A!\n");
+        xSemaphoreGiveRecursive(mutexHandle);
+
+        vTaskDelay(pdMS_TO_TICKS(3000));
 
         /* code */
     }
 }
 
-void carOutTask(void *pvParam)
+void Task2(void *pvParam)
 {
+    vTaskDelay(pdMS_TO_TICKS(1000));
+
     while (1)
     {
-        vTaskDelay(pdMS_TO_TICKS(6000));
-        xSemaphoreGive(semphrHandle);
+        printf("----------------------------------------------------------------\n");
+        printf("task2 begin\n");
+        xSemaphoreTakeRecursive(mutexHandle, portMAX_DELAY);
 
-        printf("one car out!\n");
+        printf("Task2 take !\n");
+        for (int i = 0; i < 10; i++)
+        {
+            printf("task2 i = %d\n", i);
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        }
+        printf("Task2 give !\n");
+        xSemaphoreGiveRecursive(mutexHandle);
 
-        /* code */
+        vTaskDelay(pdMS_TO_TICKS(3000));
     }
 }
-
-int testNum = 99;
-int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 void app_main(void)
 {
-    semphrHandle = xSemaphoreCreateCounting(5, 5);
-    xSemaphoreGive(semphrHandle);
+    mutexHandle = xSemaphoreCreateRecursiveMutex();
+    // mutexHandle = xSemaphoreCreateBinary();
+    vTaskSuspendAll();
+    xTaskCreate(Task1, "Task1", 1024 * 5, NULL, 1, NULL);
+    xTaskCreate(Task2, "Task2", 1024 * 5, NULL, 1, NULL);
+    // xTaskCreate(Task3, "Task3", 1024 * 5, NULL, 3, NULL);
 
-    xTaskCreate(carInTask, "carInTask", 1024 * 5, NULL, 1, NULL);
-    xTaskCreate(carOutTask, "carOutTask", 1024 * 5, NULL, 1, NULL);
+    xTaskResumeAll();
 }
