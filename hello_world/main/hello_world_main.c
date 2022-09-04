@@ -19,37 +19,40 @@ SemaphoreHandle_t semphrHandle;
 
 int iCount = 0; //
 
-void myTask1(void *pvParam)
+void carInTask(void *pvParam)
 {
+    int emptySpace = 0;
+
+    BaseType_t iResult;
     while (1)
     {
-        xSemaphoreTake(semphrHandle, portMAX_DELAY);
-        for (int i = 0; i < 10; i++)
+        emptySpace = uxSemaphoreGetCount(semphrHandle);
+        printf("emptySpace = %d\n", emptySpace);
+
+        iResult = xSemaphoreTake(semphrHandle, 0);
+
+        if (iResult == pdPASS)
         {
-            iCount++; // count
-            printf("myTask1 iCount = %d\n", iCount);
-            vTaskDelay(pdMS_TO_TICKS(1000));
+            printf("one car in!\n");
         }
-        xSemaphoreGive(semphrHandle);
+        else
+        {
+            printf("no car in!");
+        }
         vTaskDelay(pdMS_TO_TICKS(1000));
 
         /* code */
     }
 }
 
-void myTask2(void *pvParam)
+void carOutTask(void *pvParam)
 {
     while (1)
     {
-        xSemaphoreTake(semphrHandle, portMAX_DELAY);
-        for (int i = 0; i < 10; i++)
-        {
-            iCount++; // count
-            printf("myTask2 iCount = %d\n", iCount);
-            vTaskDelay(pdMS_TO_TICKS(1000));
-        }
+        vTaskDelay(pdMS_TO_TICKS(6000));
         xSemaphoreGive(semphrHandle);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+
+        printf("one car out!\n");
 
         /* code */
     }
@@ -60,9 +63,9 @@ int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 void app_main(void)
 {
-    semphrHandle = xSemaphoreCreateBinary();
+    semphrHandle = xSemaphoreCreateCounting(5, 5);
     xSemaphoreGive(semphrHandle);
-    
-    xTaskCreate(myTask1,"myTask1",1024*5,NULL,1,NULL);
-    xTaskCreate(myTask2,"myTask2",1024*5,NULL,1,NULL);
+
+    xTaskCreate(carInTask, "carInTask", 1024 * 5, NULL, 1, NULL);
+    xTaskCreate(carOutTask, "carOutTask", 1024 * 5, NULL, 1, NULL);
 }
