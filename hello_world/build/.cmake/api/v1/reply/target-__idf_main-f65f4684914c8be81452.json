@@ -690,11 +690,11 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
+			"id" : "__idf_unity::@fec746937506b5690992"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "__idf_unity::@fec746937506b5690992"
+			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
 		},
 		{
 			"backtrace" : 0,
@@ -718,6 +718,42 @@
 		},
 		{
 			"backtrace" : 0,
+			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_esp_websocket_client::@2aa04d350e0c9afab7cd"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_freemodbus::@de63ca74a1babc26b29c"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_json::@c78a8bdc820334f01148"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_jsmn::@88dec008f06e3af609d0"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "__idf_libsodium::@66e4f5d448f23c9449a2"
+		},
+		{
+			"backtrace" : 0,
 			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
 		},
 		{
@@ -730,38 +766,6 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_esp_websocket_client::@2aa04d350e0c9afab7cd"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_json::@c78a8bdc820334f01148"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_freemodbus::@de63ca74a1babc26b29c"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_jsmn::@88dec008f06e3af609d0"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_libsodium::@66e4f5d448f23c9449a2"
-		},
-		{
-			"backtrace" : 0,
 			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
 		},
 		{
@@ -771,10 +775,6 @@
 		{
 			"backtrace" : 0,
 			"id" : "__idf_spiffs::@df881b71474064c86689"
-		},
-		{
-			"backtrace" : 0,
-			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
 		},
 		{
 			"backtrace" : 0,

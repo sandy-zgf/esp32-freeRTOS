@@ -16,29 +16,59 @@
 #include "freertos/queue.h" //add by zgf
 #include "freertos/event_groups.h"
 
-EventGroupHandle_t xCreatedEventGroup;
+EventGroupHandle_t xEventBits;
 
-#define BIT_0 (1 << 0)
-#define BIT_4 (1 << 4)
+#define TASK_0_BIT (1 << 0)
+#define TASK_1_BIT (1 << 1)
+#define TASK_2_BIT (1 << 2)
+
+#define All_SYNC_BITS (TASK_0_BIT | TASK_1_BIT | TASK_2_BIT)
+
+void Task0(void *pvParam)
+{
+   while (1)
+   {
+      printf("----------------------------------\n");
+      printf("task0 begin\n");
+
+      vTaskDelay(pdMS_TO_TICKS(1000));
+
+      printf("----------------------------------\n");
+      printf("task0 set bit 0\n");
+
+      xEventGroupSync(
+          xEventBits,
+          TASK_0_BIT,
+          All_SYNC_BITS,
+          portMAX_DELAY);
+
+      printf("task0 sync !!!\n");
+      vTaskDelay(pdMS_TO_TICKS(8000));
+      /* code */
+   }
+}
 
 void Task1(void *pvParam)
 {
    while (1)
    {
-      printf("----------------------------------------------------------------\n");
-      printf("task1 begin to wait \n");
-
-      xEventGroupWaitBits(
-          xCreatedEventGroup,
-          BIT_0 | BIT_4,
-          pdTRUE,
-          pdTRUE,
-          portMAX_DELAY);
-
-      printf("----------------------\n");
-      printf("In task1, bit0 or bit4 is set!");
+      printf("----------------------------------\n");
+      printf("task1 begin\n");
 
       vTaskDelay(pdMS_TO_TICKS(3000));
+
+      printf("----------------------------------\n");
+      printf("task1 set bit 1\n");
+
+      xEventGroupSync(
+          xEventBits,
+          TASK_1_BIT,
+          All_SYNC_BITS,
+          portMAX_DELAY);
+
+      printf("task1 sync !!!\n");
+      vTaskDelay(pdMS_TO_TICKS(8000));
+      /* code */
    }
 
    /* code */
@@ -46,40 +76,42 @@ void Task1(void *pvParam)
 
 void Task2(void *pvParam)
 {
-   vTaskDelay(pdMS_TO_TICKS(1000));
-
    while (1)
    {
-      printf("----------------------!\n");
-      printf("task2 begin to set bit 0!\n");
-
-      xEventGroupSetBits(xCreatedEventGroup,BIT_0);
-
-      vTaskDelay(pdMS_TO_TICKS(5000));
-   
-      printf("task2 begin to set bit 4!\n");
-      xEventGroupSetBits(xCreatedEventGroup,BIT_4);
+      printf("----------------------------------\n");
+      printf("task2 begin\n");
 
       vTaskDelay(pdMS_TO_TICKS(5000));
 
+      printf("----------------------------------\n");
+      printf("task2 set bit 2\n");
 
+      xEventGroupSync(
+          xEventBits,
+          TASK_2_BIT,
+          All_SYNC_BITS,
+          portMAX_DELAY);
 
+      printf("task2 sync !!!\n");
+      vTaskDelay(pdMS_TO_TICKS(8000));
+      /* code */
    }
 }
 
 void app_main(void)
 {
-   xCreatedEventGroup = xEventGroupCreate();
+   xEventBits = xEventGroupCreate();
 
-   if (xCreatedEventGroup == NULL)
+   if (xEventBits == NULL)
    {
       printf("Error: Failed to create event_groups\n");
    }
    else
    {
       vTaskSuspendAll();
-      xTaskCreate(Task1,"Task1",1024*5,NULL,1,NULL);
-      xTaskCreate(Task2,"Task2",1024*5,NULL,1,NULL);
+      xTaskCreate(Task0, "Task0", 1024 * 5, NULL, 1, NULL);
+      xTaskCreate(Task1, "Task1", 1024 * 5, NULL, 1, NULL);
+      xTaskCreate(Task2, "Task2", 1024 * 5, NULL, 1, NULL);
       xTaskResumeAll();
    }
 }
