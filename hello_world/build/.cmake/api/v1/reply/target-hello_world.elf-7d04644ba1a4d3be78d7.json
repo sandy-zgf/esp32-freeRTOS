@@ -1250,22 +1250,6 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_esp_hid::@15df40e16a5d8775dd9b"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_adc_cal::@dc736dc1d836ef36c9a5"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_lcd::@d5a84597e1633c9ab0d3"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
 		},
 		{
@@ -1278,15 +1262,19 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_protocomm::@d76d01c8dec06205e1fc"
+			"id" : "__idf_esp_adc_cal::@dc736dc1d836ef36c9a5"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_esp_websocket_client::@2aa04d350e0c9afab7cd"
+			"id" : "__idf_esp_hid::@15df40e16a5d8775dd9b"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+			"id" : "__idf_esp_lcd::@d5a84597e1633c9ab0d3"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
 		},
 		{
 			"backtrace" : 3,
@@ -1294,15 +1282,11 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
+			"id" : "__idf_protocomm::@d76d01c8dec06205e1fc"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_freemodbus::@de63ca74a1babc26b29c"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
 		},
 		{
 			"backtrace" : 3,
@@ -1310,7 +1294,23 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_esp_websocket_client::@2aa04d350e0c9afab7cd"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_json::@c78a8bdc820334f01148"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_freemodbus::@de63ca74a1babc26b29c"
 		},
 		{
 			"backtrace" : 3,
@@ -1318,15 +1318,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_libsodium::@66e4f5d448f23c9449a2"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_openssl::@e614527ea5fe5ca5f395"
 		},
 		{
 			"backtrace" : 3,
@@ -1334,15 +1326,23 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_openssl::@e614527ea5fe5ca5f395"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_spiffs::@df881b71474064c86689"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_main::@7368607ed66887415643"
+			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
 		},
 		{
 			"backtrace" : 3,
 			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_main::@7368607ed66887415643"
 		}
 	],
 	"id" : "hello_world.elf::@6890427a1f51a3e7e1df",
