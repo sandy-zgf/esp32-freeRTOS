@@ -1773,7 +1773,7 @@
 				{
 					"directoryIndex" : 15,
 					"id" : "__idf_app_update::@cc3b426666063acc9674",
-					"jsonFile" : "target-__idf_app_update-65dc67f1279a9c7d7847.json",
+					"jsonFile" : "target-__idf_app_update-e74b61bf2563e690174a.json",
 					"name" : "__idf_app_update",
 					"projectIndex" : 1
 				},
@@ -2095,7 +2095,7 @@
 				{
 					"directoryIndex" : 93,
 					"id" : "__idf_main::@7368607ed66887415643",
-					"jsonFile" : "target-__idf_main-15be144707649e4a66f7.json",
+					"jsonFile" : "target-__idf_main-616e0ce687740f29620a.json",
 					"name" : "__idf_main",
 					"projectIndex" : 1
 				},
@@ -2249,7 +2249,7 @@
 				{
 					"directoryIndex" : 92,
 					"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098",
-					"jsonFile" : "target-__idf_wifi_provisioning-8b11565d6202db990c40.json",
+					"jsonFile" : "target-__idf_wifi_provisioning-7208a50066892394016c.json",
 					"name" : "__idf_wifi_provisioning",
 					"projectIndex" : 1
 				},
@@ -2270,7 +2270,7 @@
 				{
 					"directoryIndex" : 23,
 					"id" : "__ldgen_output_sections.ld::@874df54e61e20112dfd4",
-					"jsonFile" : "target-__ldgen_output_sections.ld-74e06ab9bbbe170d21b9.json",
+					"jsonFile" : "target-__ldgen_output_sections.ld-6d9b0aa678cc12f3bf5e.json",
 					"name" : "__ldgen_output_sections.ld",
 					"projectIndex" : 1
 				},
@@ -2424,7 +2424,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "hello_world.elf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-hello_world.elf-4ed65713ff4eb7b36b00.json",
+					"jsonFile" : "target-hello_world.elf-441190c8e41f79ece292.json",
 					"name" : "hello_world.elf",
 					"projectIndex" : 0
 				},

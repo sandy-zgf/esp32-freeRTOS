@@ -59,10 +59,28 @@ void Task2(void *pvParam)
    }
 }
 
+void Task3(void *pvParam)
+{
+   int buf_space = 0;
+   int min_space = 1000;
+   while (1)
+   {
+      buf_space = xStreamBufferSpacesAvailable(StreamBufferHandle);
+      if(buf_space < min_space)min_space = buf_space;
+
+
+      printf("--------------------\n");
+
+      printf("buf_space = %d,min_space = %d !\n",buf_space,min_space);
+      vTaskDelay(pdMS_TO_TICKS(3000));
+   }
+   
+
+}
 void app_main(void)
 {
 
-   StreamBufferHandle = xStreamBufferCreate(1000, 100);
+   StreamBufferHandle = xStreamBufferCreate(200, 100);
 
    if (StreamBufferHandle == NULL)
    {
@@ -74,6 +92,7 @@ void app_main(void)
       vTaskSuspendAll();
       xTaskCreate(Task1, "Task1", 1024 * 5, NULL, 1, NULL);
       xTaskCreate(Task2, "Task2", 1024 * 5, NULL, 1, NULL);
+      xTaskCreate(Task3, "Task3", 1024 * 5, NULL, 1, NULL);
       xTaskResumeAll();
    }
 }
