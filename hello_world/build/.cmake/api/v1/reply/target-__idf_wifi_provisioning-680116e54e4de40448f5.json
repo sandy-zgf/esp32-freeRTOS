@@ -526,15 +526,15 @@
 					"path" : "D:/esp/esp-idf/components/protobuf-c/protobuf-c"
 				},
 				{
-					"backtrace" : 8,
+					"backtrace" : 7,
 					"path" : "D:/esp/esp-idf/components/mdns/include"
 				},
 				{
-					"backtrace" : 8,
+					"backtrace" : 7,
 					"path" : "D:/esp/esp-idf/components/console"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/esp/esp-idf/components/json/cJSON"
 				}
 			],
@@ -565,7 +565,7 @@
 		},
 		{
 			"backtrace" : 7,
-			"id" : "__idf_json::@c78a8bdc820334f01148"
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
 		},
 		{
 			"backtrace" : 5,
@@ -573,7 +573,7 @@
 		},
 		{
 			"backtrace" : 8,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+			"id" : "__idf_json::@c78a8bdc820334f01148"
 		}
 	],
 	"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098",

@@ -14,9 +14,9 @@
 #include "esp_spi_flash.h"
 
 #include <string.h>
-#include "freertos/stream_buffer.h"
+#include "freertos/message_buffer.h"
 
-StreamBufferHandle_t StreamBufferHandle = NULL;
+MessageBufferHandle_t MessageBufferHandle = NULL;
 
 void Task1(void *pvParam)
 {
@@ -24,67 +24,51 @@ void Task1(void *pvParam)
    int str_length = 0;
    int send_bytes = 0;
    char tx_buf[50]; //发送的数据
-   while (1)
+
+   for (int i = 0; i < 3; i++)
    {
-      i++;
-      str_length = sprintf(tx_buf, "hello I am zgf %d", i);
-      send_bytes = xStreamBufferSend(StreamBufferHandle,
-                                     (void *)tx_buf,
-                                     str_length,
-                                     portMAX_DELAY);
+      str_length = sprintf(tx_buf, "hello I am zgf number %d", i);
+      send_bytes = xMessageBufferSend(MessageBufferHandle,
+                                      (void *)tx_buf,
+                                      str_length,
+                                      portMAX_DELAY);
 
-      printf("Send : str_length = %d,send_bytes = %d!\n", str_length, send_bytes);
-
-      vTaskDelay(pdMS_TO_TICKS(4000));
+      printf("Send : i = %d,send_bytes = %d!\n", i, send_bytes);
 
       /* code */
    }
+
+   vTaskDelete(NULL);
 
    /* code */
 }
 
 void Task2(void *pvParam)
 {
-   char rx_buf[50]; //
+   char rx_buf[200]; //
    int rec_bytes = 0;
+
+   vTaskDelay(pdMS_TO_TICKS(3000));
    while (1)
    {
       memset(rx_buf, 0, sizeof(rx_buf));
-      rec_bytes = xStreamBufferReceive(StreamBufferHandle,
-                           (void *)rx_buf,
-                           sizeof(rx_buf),
-                           portMAX_DELAY);
+      rec_bytes = xMessageBufferReceive(MessageBufferHandle,
+                                       (void *)rx_buf,
+                                       sizeof(rx_buf),
+                                       portMAX_DELAY);
 
       printf("Receive : rec_bytes = %d,data = %s!\n", rec_bytes, rx_buf);
+      vTaskDelay(pdMS_TO_TICKS(1000));
    }
-}
-
-void Task3(void *pvParam)
-{
-   int buf_space = 0;
-   int min_space = 1000;
-   while (1)
-   {
-      buf_space = xStreamBufferSpacesAvailable(StreamBufferHandle);
-      if(buf_space < min_space)min_space = buf_space;
-
-
-      printf("--------------------\n");
-
-      printf("buf_space = %d,min_space = %d !\n",buf_space,min_space);
-      vTaskDelay(pdMS_TO_TICKS(3000));
-   }
-   
-
 }
 void app_main(void)
 {
 
-   StreamBufferHandle = xStreamBufferCreate(200, 100);
+   MessageBufferHandle = xMessageBufferCreate(1000);
 
-   if (StreamBufferHandle == NULL)
+   if (MessageBufferHandle == NULL)
    {
-      printf("StreamBufferHandle creation failed\n");
+      printf("MessageBufferHandle creation failed\n");
    }
    else
    {
@@ -92,7 +76,6 @@ void app_main(void)
       vTaskSuspendAll();
       xTaskCreate(Task1, "Task1", 1024 * 5, NULL, 1, NULL);
       xTaskCreate(Task2, "Task2", 1024 * 5, NULL, 1, NULL);
-      xTaskCreate(Task3, "Task3", 1024 * 5, NULL, 1, NULL);
       xTaskResumeAll();
    }
 }
