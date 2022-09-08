@@ -57,6 +57,7 @@ void Task2(void *pvParam)
       vTaskDelay(pdMS_TO_TICKS(4000));
       printf("----------------------------------\n");
       printf("task2 begin notify 1\n");
+      printf("task2 begin notify 2\n");
 
       xTaskNotify(xTask1,0x01,eSetValueWithOverwrite);
       vTaskDelay(pdMS_TO_TICKS(4000));
