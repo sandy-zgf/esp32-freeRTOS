@@ -20,15 +20,29 @@ static TaskHandle_t xTask1 = NULL;
 
 void Task1(void *pvParam)
 {
+   uint32_t ulNotifiedValue;
    while (1)
    {
       printf("----------------------------------\n");
       printf("task1 begin\n");
 
-      ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+      xTaskNotifyWait(0x00,
+                      ULONG_MAX,
+                      &ulNotifiedValue,
+                      portMAX_DELAY); //
+      if ((ulNotifiedValue & 0x01) != 0)
+      {
+         printf("task1 process bit0 event!\n");
+      }
+      if ((ulNotifiedValue & 0x02) != 0)
+      {
+         printf("task1 process bit1 event!\n");
+      }
+      if ((ulNotifiedValue & 0x04) != 0)
+      {
+         printf("task1 process bit2 event!\n");
+      }
 
-      printf("----------------------------------\n");
-      printf("task1 got notification !!!\n");
       vTaskDelay(pdMS_TO_TICKS(3000));
       /* code */
    }
@@ -44,7 +58,14 @@ void Task2(void *pvParam)
       printf("----------------------------------\n");
       printf("task2 begin notify 1\n");
 
-      xTaskNotifyGive(xTask1);
+      xTaskNotify(xTask1,0x01,eSetValueWithOverwrite);
+      vTaskDelay(pdMS_TO_TICKS(4000));
+
+      xTaskNotify(xTask1,0x02,eSetValueWithOverwrite);
+      vTaskDelay(pdMS_TO_TICKS(4000));
+
+      xTaskNotify(xTask1,0x04,eSetValueWithOverwrite);
+      vTaskDelay(pdMS_TO_TICKS(4000));
    }
 }
 
