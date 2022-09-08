@@ -13,37 +13,30 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 
-#include "freertos/queue.h" //add by zgf
-#include "freertos/event_groups.h"
+#include <string.h>
+#include "freertos/stream_buffer.h"
 
-static TaskHandle_t xTask1 = NULL;
+StreamBufferHandle_t StreamBufferHandle = NULL;
 
 void Task1(void *pvParam)
 {
-   uint32_t ulNotifiedValue;
+   int i = 0;
+   int str_length = 0;
+   int send_bytes = 0;
+   char tx_buf[50]; //发送的数据
    while (1)
    {
-      printf("----------------------------------\n");
-      printf("task1 begin\n");
+      i++;
+      str_length = sprintf(tx_buf, "hello I am zgf %d", i);
+      send_bytes = xStreamBufferSend(StreamBufferHandle,
+                                     (void *)tx_buf,
+                                     str_length,
+                                     portMAX_DELAY);
 
-      xTaskNotifyWait(0x00,
-                      ULONG_MAX,
-                      &ulNotifiedValue,
-                      portMAX_DELAY); //
-      if ((ulNotifiedValue & 0x01) != 0)
-      {
-         printf("task1 process bit0 event!\n");
-      }
-      if ((ulNotifiedValue & 0x02) != 0)
-      {
-         printf("task1 process bit1 event!\n");
-      }
-      if ((ulNotifiedValue & 0x04) != 0)
-      {
-         printf("task1 process bit2 event!\n");
-      }
+      printf("Send : str_length = %d,send_bytes = %d!\n", str_length, send_bytes);
 
-      vTaskDelay(pdMS_TO_TICKS(3000));
+      vTaskDelay(pdMS_TO_TICKS(4000));
+
       /* code */
    }
 
@@ -52,29 +45,35 @@ void Task1(void *pvParam)
 
 void Task2(void *pvParam)
 {
+   char rx_buf[50]; //
+   int rec_bytes = 0;
    while (1)
    {
-      vTaskDelay(pdMS_TO_TICKS(4000));
-      printf("----------------------------------\n");
-      printf("task2 begin notify 1\n");
-      printf("task2 begin notify 2\n");
+      memset(rx_buf, 0, sizeof(rx_buf));
+      rec_bytes = xStreamBufferReceive(StreamBufferHandle,
+                           (void *)rx_buf,
+                           sizeof(rx_buf),
+                           portMAX_DELAY);
 
-      xTaskNotify(xTask1,0x01,eSetValueWithOverwrite);
-      vTaskDelay(pdMS_TO_TICKS(4000));
-
-      xTaskNotify(xTask1,0x02,eSetValueWithOverwrite);
-      vTaskDelay(pdMS_TO_TICKS(4000));
-
-      xTaskNotify(xTask1,0x04,eSetValueWithOverwrite);
-      vTaskDelay(pdMS_TO_TICKS(4000));
+      printf("Receive : rec_bytes = %d,data = %s!\n", rec_bytes, rx_buf);
    }
 }
 
 void app_main(void)
 {
 
-   vTaskSuspendAll();
-   xTaskCreate(Task1, "Task1", 1024 * 5, NULL, 1, &xTask1);
-   xTaskCreate(Task2, "Task2", 1024 * 5, NULL, 1, NULL);
-   xTaskResumeAll();
+   StreamBufferHandle = xStreamBufferCreate(1000, 100);
+
+   if (StreamBufferHandle == NULL)
+   {
+      printf("StreamBufferHandle creation failed\n");
+   }
+   else
+   {
+
+      vTaskSuspendAll();
+      xTaskCreate(Task1, "Task1", 1024 * 5, NULL, 1, NULL);
+      xTaskCreate(Task2, "Task2", 1024 * 5, NULL, 1, NULL);
+      xTaskResumeAll();
+   }
 }
